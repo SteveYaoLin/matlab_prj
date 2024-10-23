@@ -28,11 +28,14 @@ S3 = fft(s3);
 S3_real = real(S3);
 S3_imag = imag(S3);
 
-% 在日志中显示 FFT 的实部和虚部
-disp('FFT 实部:');
-disp(S3_real(1:N/2+1));   % 只显示前 N/2+1 个点的实部
-disp('FFT 虚部:');
-disp(S3_imag(1:N/2+1));   % 只显示前 N/2+1 个点的虚部
+% 创建并打开日志文件
+log_file = fopen('fft_log.txt', 'w');
+
+% 将 FFT 实部和虚部写入日志文件
+fprintf(log_file, 'FFT 实部:\n');
+fprintf(log_file, '%f\n', S3_real(1:N/2+1));   % 只显示前 N/2+1 个点的实部
+fprintf(log_file, '\nFFT 虚部:\n');
+fprintf(log_file, '%f\n', S3_imag(1:N/2+1));   % 只显示前 N/2+1 个点的虚部
 
 % 计算 FFT 幅度
 S3_mag = abs(S3/N);           % 计算 FFT 幅度，并归一化
@@ -43,6 +46,16 @@ S3_mag(2:end-1) = 2*S3_mag(2:end-1); % 单边频谱加倍
 frequency_resolution = fs / N;    % 计算频率分辨率
 f_axis = (0:N/2);                 % 使用索引作为横轴
 
+% 计算目标频率在 FFT 中的索引
+s3_index = f3 / frequency_resolution;
+
+% 将频率分辨率和目标频率对应的索引写入日志文件
+fprintf(log_file, '\nFFT 频率分辨率: %f Hz\n', frequency_resolution);
+fprintf(log_file, 's3 的频率应在大约 %.2f 点位置\n', s3_index);
+
+% 关闭日志文件
+fclose(log_file);
+
 % 绘制频谱图
 figure;
 stem(f_axis, S3_mag, 'filled');  % 横坐标显示为索引
@@ -50,9 +63,5 @@ xlabel(['频率索引, 每点对应的频率分辨率 = ', num2str(frequency_resolution), ' Hz
 ylabel('幅度');
 title('s3 波形的频谱图 (FFT)');
 
-% 显示 FFT 的频率分辨率
-disp(['FFT 频率分辨率: ', num2str(frequency_resolution), ' Hz']);
-
-% 计算目标频率在 FFT 中的索引
-s3_index = f3 / frequency_resolution;
-disp(['s3 的频率应在大约 ', num2str(s3_index), ' 点位置']);
+% 日志文件已生成并保存在当前目录下
+disp('FFT 计算的日志信息已保存到文件 fft_log.txt');
