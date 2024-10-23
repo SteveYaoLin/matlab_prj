@@ -28,15 +28,6 @@ S3 = fft(s3);
 S3_real = real(S3);
 S3_imag = imag(S3);
 
-% 创建并打开日志文件
-log_file = fopen('fft_log.txt', 'w');
-
-% 将 FFT 实部和虚部写入日志文件
-fprintf(log_file, 'FFT 实部:\n');
-fprintf(log_file, '%f\n', S3_real(1:N/2+1));   % 只显示前 N/2+1 个点的实部
-fprintf(log_file, '\nFFT 虚部:\n');
-fprintf(log_file, '%f\n', S3_imag(1:N/2+1));   % 只显示前 N/2+1 个点的虚部
-
 % 计算 FFT 幅度
 S3_mag = abs(S3/N);           % 计算 FFT 幅度，并归一化
 S3_mag = S3_mag(1:N/2+1);     % 只取前 N/2+1 个点（实部）
@@ -48,6 +39,21 @@ f_axis = (0:N/2);                 % 使用索引作为横轴
 
 % 计算目标频率在 FFT 中的索引
 s3_index = f3 / frequency_resolution;
+
+% 创建并打开日志文件
+log_file = fopen('fft_log.txt', 'w');
+
+% 写入前 128 个点的 FFT 实部和虚部
+fprintf(log_file, '前 128 个点的 FFT 结果:\n');
+for i = 0:127
+    fprintf(log_file, '第 %d 个点: %d, 实部: %f, 虚部: %f\n', i, i, S3_real(i+1), S3_imag(i+1));
+end
+
+% 写入 s3 附近 3400 到 3500 点范围的 FFT 实部和虚部
+fprintf(log_file, '\n3400 到 3500 个点的 FFT 结果:\n');
+for i = 3400:3500
+    fprintf(log_file, '第 %d 个点: %d, 实部: %f, 虚部: %f\n', i, i, S3_real(i+1), S3_imag(i+1));
+end
 
 % 将频率分辨率和目标频率对应的索引写入日志文件
 fprintf(log_file, '\nFFT 频率分辨率: %f Hz\n', frequency_resolution);
