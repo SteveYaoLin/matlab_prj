@@ -38,7 +38,7 @@ fprintf('Magnitude (Floating-point): %.4f\n', magnitude);
 
 % Convert magnitude to 15-bit signed 1QN format (two's complement)
 magnitude_fixed = round(magnitude * 2^14);
-if magnitude_fixed >= 2^14
+if magnitude_fixed >= 2^15
     magnitude_fixed = 2^15 - 1; % Saturate at maximum value for 15-bit signed
 end
 fprintf('Magnitude (1QN Fixed-point, Hex): 0x%04X\n', magnitude_fixed);
