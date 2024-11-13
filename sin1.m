@@ -4,7 +4,7 @@ f3 = 13.56e6;          % s3 波形的频率为 13.56 MHz
 fs = 65e6;             % 采样频率为 65 MHz
 A3 = 127.5;            % s3 振幅的一半
 DC3 = 127.5;           % s3 的直流偏移，使其在 0 到 255 之间
-p3 = 0;                % s3 的初始相位为 0
+p3 = pi/2;                % s3 的初始相位为 0
 
 % 时间序列
 t = (0:N-1)/fs;        % 采样时间序列
@@ -43,16 +43,16 @@ s3_index = f3 / frequency_resolution;
 % 创建并打开日志文件
 log_file = fopen('fft_log.txt', 'w');
 
-% 写入前 128 个点的 FFT 实部、虚部和相位
+% 写入前 128 个点的 FFT 实部、虚部、取模和相位
 fprintf(log_file, '前 128 个点的 FFT 结果:\n');
 for i = 0:127
-    fprintf(log_file, '第 %d 个点: %d, 实部: %f, 虚部: %f, 相位: %f\n', i, i, S3_real(i+1), S3_imag(i+1), S3_phase(i+1));
+    fprintf(log_file, '第 %d 个点: %d, 实部: %f, 虚部: %f, 取模: %f, 相位: %f\n', i, i, S3_real(i+1), S3_imag(i+1), S3_mag(i+1), S3_phase(i+1));
 end
 
-% 写入 s3 附近 3400 到 3500 点范围的 FFT 实部、虚部和相位
+% 写入 s3 附近 3400 到 3500 点范围的 FFT 实部、虚部、取模和相位
 fprintf(log_file, '\n3400 到 3500 个点的 FFT 结果:\n');
 for i = 3400:3500
-    fprintf(log_file, '第 %d 个点: %d, 实部: %f, 虚部: %f, 相位: %f\n', i, i, S3_real(i+1), S3_imag(i+1), S3_phase(i+1));
+    fprintf(log_file, '第 %d 个点: %d, 实部: %f, 虚部: %f, 取模: %f, 相位: %f\n', i, i, S3_real(i+1), S3_imag(i+1), S3_mag(i+1), S3_phase(i+1));
 end
 
 % 将频率分辨率和目标频率对应的索引写入日志文件
