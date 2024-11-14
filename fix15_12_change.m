@@ -39,9 +39,9 @@ function fixedPointValue = decimal_to_1Q12(decimalNumber)
         fixedPointValue = -2^14; % Negative saturation
     end
 
-    % Convert to 15-bit representation by handling negative values
+    % Convert negative values to 15-bit two's complement representation
     if fixedPointValue < 0
-        fixedPointValue = bitand(fixedPointValue, 2^15 - 1); % Apply 15-bit mask
+        fixedPointValue = bitand(fixedPointValue + 2^15, 2^15 - 1);
     end
 end
 
