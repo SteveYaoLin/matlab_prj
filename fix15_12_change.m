@@ -1,12 +1,12 @@
 function main()
     % Main script to test the conversion functions
     % Define an example decimal number within the range [-π/2, π/2]
-    decimalNumber = pi / 4; 
+    decimalNumber = pi / 4;
 
     % Convert the decimal number to 1Q12 fixed-point format
     fixedPointValue = decimal_to_1Q12(decimalNumber);
     fprintf('Decimal Number: %.4f\n', decimalNumber);
-    fprintf('1Q12 Format (binary): %s\n', dec2bin(fixedPointValue, 15));
+    fprintf('1Q12 Format (hex): %s\n', dec2hex(fixedPointValue, 4));
 
     % Convert the 1Q12 fixed-point value back to a 4-digit decimal format
     recoveredDecimal = Q12_to_decimal(fixedPointValue);
