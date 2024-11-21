@@ -3,7 +3,7 @@ function main()
     fprintf('Begin!\n');
     
     % Define an example decimal number within the range [-π/2, π/2]
-    decimalNumber = -1*pi/4;
+    decimalNumber = -1*pi/8;
     
     % Convert the decimal number to 1Q12 fixed-point format
     fixedPointValue = decimal_to_1Q12(decimalNumber);
