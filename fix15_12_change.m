@@ -15,7 +15,7 @@ function main()
     fprintf('Recovered Decimal (4 digits): %.4f\n', recoveredDecimal);
 
     % Define a 15-bit hexadecimal 1Q12 format variable "phase"
-    phaseHex = '0e8a'; % Example value
+    phaseHex = '2be5'; % Example value
     fprintf('\nOriginal Phase (hex): %s\n', phaseHex);
 
     % Convert "phase" from hexadecimal 1Q12 format to signed decimal
