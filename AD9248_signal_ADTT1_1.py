@@ -1,5 +1,8 @@
+import pandas as pd
+import matplotlib.pyplot as plt
 import chardet
 
+# 检测文件编码
 def detect_file_encoding(file_path):
     with open(file_path, 'rb') as file:  # 以二进制方式打开文件
         raw_data = file.read(10000)  # 读取文件前10000字节
@@ -44,8 +47,8 @@ def generate_chart_from_vcs(file_path):
         data["V(mV)"] = pd.to_numeric(data["V(mV)"], errors="coerce")
         
         # 筛选出需要的数据
-        x_data = data["Vpp"].iloc[1:101].dropna()  # 第1列，从第2行到第100行
-        y_data = data["V(mV)"].iloc[1:101].dropna()  # 第6列的对应数据
+        x_data = data["Vpp"].iloc[1:134].dropna()  # 第1列，从第2行到第100行
+        y_data = data["V(mV)"].iloc[1:134].dropna()  # 第6列的对应数据
         
         if x_data.empty or y_data.empty:
             raise ValueError("提取的数据不足以绘制图表")
