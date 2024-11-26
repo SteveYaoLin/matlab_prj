@@ -49,7 +49,7 @@ if __name__ == "__main__":
     total_bits = 15
     int_bits = 2
     frac_bits = 12
-    value = -0.3927
+    value = -0.7854
 
     result = decimal_to_fixed_point(value, total_bits, int_bits, frac_bits)
 

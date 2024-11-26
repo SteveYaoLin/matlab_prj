@@ -30,8 +30,8 @@ try
     fclose(fid);
 
     % 提取所需的列
-    x_data = data{1}(2:min(100, length(data{1})));  % 第1列，第2行到第100行
-    y_data = data{2}(2:min(100, length(data{2})));  % 第6列
+    x_data = data{1}(2:min(100, length(data{1}))); % 第1列，第2行到第100行
+    y_data = data{2}(2:min(100, length(data{2}))); % 第6列
 
     % 检查数据完整性
     if isempty(x_data) || isempty(y_data)

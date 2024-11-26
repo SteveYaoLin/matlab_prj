@@ -3,7 +3,7 @@ function main()
     fprintf('Begin!\n');
     
     % Define an example decimal number within the range [-π/2, π/2]
-    decimalNumber = -1*pi/8;
+    decimalNumber = -1.5564;
     
     % Convert the decimal number to 1Q12 fixed-point format
     fixedPointValue = decimal_to_1Q12(decimalNumber);
@@ -15,7 +15,7 @@ function main()
     fprintf('Recovered Decimal (4 digits): %.4f\n', recoveredDecimal);
 
     % Define a 15-bit hexadecimal 1Q12 format variable "phase"
-    phaseHex = '2be5'; % Example value
+    phaseHex = '34ac'; % Example value
     fprintf('\nOriginal Phase (hex): %s\n', phaseHex);
 
     % Convert "phase" from hexadecimal 1Q12 format to signed decimal
@@ -28,8 +28,8 @@ function main()
     fprintf('Converted Back Phase (hex): %s\n', dec2hex(phaseFixedBack, 4));
 
     % Define two 1Q12 hexadecimal numbers A and B for subtraction
-    A_hex = '5256'; % Example value for A
-    B_hex = '286a'; % Example value for B
+    A_hex = '657f'; % Example value for A
+    B_hex = '30d3'; % Example value for B
     fprintf('\nA (hex): %s\n', A_hex);
     fprintf('B (hex): %s\n', B_hex);
 
