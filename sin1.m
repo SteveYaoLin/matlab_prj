@@ -1,6 +1,6 @@
 % 参数定义
 N = 16384;             % 采样点数
-f3 = 13.56e6;          % s3 和 s4 波形的频率为 13.56 MHz
+f3 = 13.56e5;          % s3 和 s4 波形的频率为 13.56 MHz
 fs = 65e6;             % 采样频率为 65 MHz
 A3 = 8191;             % s3 振幅的一半 (14-bit 最大值)
 DC3 = 8191;            % s3 的直流偏移，使其在 0 到 16383 之间
@@ -65,10 +65,10 @@ for i = 0:127
     fprintf(log_file, 's4 实部: %f, s4 虚部: %f, s4 取模: %f, s4 相位: %f, 相位差: %f\n', ...
             S4_real(i+1), S4_imag(i+1), S4_mag(i+1), S4_phase(i+1), phase_diff(i+1));
 end
-
+displaynum = round(f3 / frequency_resolution)
 % 写入 3000 到 3500 点范围的 FFT 实部、虚部、取模和相位
-fprintf(log_file, '\n3000 到 3500 个点的 FFT 结果:\n');
-for i = 3000:3500
+fprintf(log_file, '\n %d 到 %D 个点的 FFT 结果:\n',(displaynum - 200 ),(displaynum + 200 ));
+for i = (displaynum - 200 ):(displaynum + 200 )
     fprintf(log_file, '第 %d 个点: %d, s3 实部: %f, s3 虚部: %f, s3 取模: %f, s3 相位: %f, ', ...
             i, i, S3_real(i+1), S3_imag(i+1), S3_mag(i+1), S3_phase(i+1));
     fprintf(log_file, 's4 实部: %f, s4 虚部: %f, s4 取模: %f, s4 相位: %f, 相位差: %f\n', ...
